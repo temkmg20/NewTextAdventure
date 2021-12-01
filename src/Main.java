@@ -12,16 +12,22 @@ public class Main {
         Random rand = new Random();
 
         // Game variables
-        String [] enemies = {"Ninja", "Warrior", "Guard", "Assassin"};
+        //String [] enemies = {"Ninja", "Warrior", "Guard", "Assassin"};
         int maxEnemyHealth= 100;
-        int enemyHitDamage= 20;
+        int minEnemyHealth= 65;
+        int enemyHitDamage= 25;
+        Enemy [] enemies = new Enemy[4];
+        enemies[0] = new Warrior("Warrior");
+        enemies[1] = new Ninja("Ninja");
+        enemies[2] = new Assassin("Assassin");
+        enemies[3] = new Guard("Guard");
 
         // Player variables
         int health = 100;
         int shieldValue= 15;
         int numShield = 2;
         int numPowerUps = 1;
-        int attackDamage = 30;
+        int attackDamage = 45;
         int powerUpChance= 22; // percentage
         int shieldChance= 30;
         String powerUp = "Freeze"; // Allows player to deal damage without
@@ -34,8 +40,8 @@ public class Main {
         GAME:
         while (running){
 
-            int enemyHealth = rand.nextInt(100);
-            String enemy = enemies[rand.nextInt(enemies.length)];
+            int enemyHealth = rand.nextInt(35) + 65;
+            Enemy enemy = enemies[rand.nextInt(3)];
             System.out.println("The " + enemy + " has appeared!\n");
 
             while(enemyHealth > 0) {
@@ -45,7 +51,7 @@ public class Main {
                 System.out.println("1 to Attack ");
                 System.out.println("2 to Drink shield ");
                 System.out.println("3 to Use power up");
-                System.out.println("4 to Run");
+                System.out.println("4 to Run, and have enemy respawn with new health");
 
                 int input = scnr.nextInt();
                 if (input == 1){
@@ -65,7 +71,7 @@ public class Main {
                     health+= shieldValue;
                     numShield--;
                     System.out.println("You drank shield potion, you now have " + health + " health" +
-                            "\nYou now have" + numShield + " shield potion left");
+                            "\nYou now have " + numShield + " shield potion left");
                 }
                 else {
                     System.out.println("You have no shield potion left! Defeat the enemy for a chance at " +
@@ -127,7 +133,7 @@ public class Main {
                 System.out.println("You continue your journey...");
             }
             else if (input ==2){
-                System.out.println("You exit the jungle with the hidden treasure!");
+                System.out.println("You exit the jungle wit your life, but no treasure.");
                 break;
             }
 

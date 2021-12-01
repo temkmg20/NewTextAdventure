@@ -1,11 +1,10 @@
-public class Ninja {
-private String name;
-private double health;
-private String [] options = {"Fists", "Sword"};
+public class Ninja extends Enemy {
 
-    public Ninja (String name, double health, String [] options){
+    public Ninja (String name){
+        this.name = name;
+        this.health = Math.random() * 80 + 20;
     }
 
-    Ninja n1 = new Ninja("Ninja", 100, options);
+
 
 }
