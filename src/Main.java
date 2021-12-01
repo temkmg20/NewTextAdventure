@@ -27,16 +27,16 @@ public class Main {
         String powerUp = "Freeze"; // Allows player to deal damage without
                                    // without taking any in return
 
-
+        System.out.println("Welcome to Jungle Survivor\nDo you have what it takes to" +
+                " fight your way to the hidden treasure?");
+        System.out.println("Let the games begin!");
         boolean running = true;
         GAME:
         while (running){
-            System.out.println("Welcome to Jungle Survivor\nDo you have what it takes to" +
-                    " fight your way to the hidden treasure?");
-            System.out.println("Let the games begin");
+
             int enemyHealth = rand.nextInt(100);
             String enemy = enemies[rand.nextInt(enemies.length)];
-            System.out.println(enemy + " has appeared!\n");
+            System.out.println("The " + enemy + " has appeared!\n");
 
             while(enemyHealth > 0) {
                 System.out.println("Your Health: " + health);
@@ -53,7 +53,7 @@ public class Main {
                 int damageTaken= rand.nextInt(enemyHitDamage);
                 enemyHealth-= damageDealt;
                 health -= damageTaken;
-                    System.out.println("You hit the " + enemy + " for" + damageDealt + " damage");
+                    System.out.println("You hit the " + enemy + " for " + damageDealt + " damage");
                     System.out.println("You received " + damageTaken + " in return");
                     if(health < 1 ){
                         System.out.println("You have taken to much damage to go on!");
@@ -65,7 +65,7 @@ public class Main {
                     health+= shieldValue;
                     numShield--;
                     System.out.println("You drank shield potion, you now have " + health + " health" +
-                            "\nYou now have" + numShield + "shield potion left");
+                            "\nYou now have" + numShield + " shield potion left");
                 }
                 else {
                     System.out.println("You have no shield potion left! Defeat the enemy for a chance at " +
@@ -124,14 +124,23 @@ public class Main {
                 input = scnr.nextInt();
             }
             if (input == 1){
-                System.out.println("You continue the journey to the treasure");
+                System.out.println("You continue your journey...");
+            }
+            else if (input ==2){
+                System.out.println("You exit the jungle with the hidden treasure!");
+                break;
             }
 
 
+            // Fix the Guard issue
+            // Fix the "run option"
 
 
             
 
         }
+        System.out.println("#####################");
+        System.out.println("Thanks for playing!");
+        System.out.println("#####################");
     }
 }
