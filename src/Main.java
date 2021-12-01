@@ -20,10 +20,12 @@ public class Main {
         int health = 100;
         int shieldValue= 15;
         int numShield = 2;
+        int numPowerUps = 1;
         int attackDamage = 30;
         int powerUpChance= 22; // percentage
         int shieldChance= 30;
-        String [] powerUp = {"Shield", "Double Damage", "Freeze"};
+        String powerUp = "Freeze"; // Allows player to deal damage without
+                                   // without taking any in return
 
 
         boolean running = true;
@@ -51,8 +53,8 @@ public class Main {
                 int damageTaken= rand.nextInt(enemyHitDamage);
                 enemyHealth-= damageDealt;
                 health -= damageTaken;
-                    System.out.println("You strike " + enemy + "for" + damageDealt + "damage");
-                    System.out.println("You receive " + damageTaken + " in return");
+                    System.out.println("You hit the " + enemy + " for" + damageDealt + " damage");
+                    System.out.println("You received " + damageTaken + " in return");
                     if(health < 1 ){
                         System.out.println("You have taken to much damage to go on!");
                         break;
@@ -71,16 +73,62 @@ public class Main {
                 }
                 }
                 else if (input == 3){
-
+                    if(numPowerUps >= 1){
+                        System.out.println("You have frozen the "+ enemy);
+                        System.out.println("You can now attack without receiving damage");
+                        int damageDealt = rand.nextInt(attackDamage);
+                        enemyHealth-= damageDealt;
+                        numPowerUps--;
+                    }
+                    else {
+                        System.out.println("You have no power ups left! Defeat the enemy for a chance at " +
+                                "a power up or shield potion!");
+                    }
                 }
                 else if (input == 4){
-
+                    System.out.println("You run away from the " + enemy);
+                    continue GAME;
                 }
                 else {
+                    System.out.println("Invalid Command");
                 }
 
 
             }
+
+
+            if(health < 1){
+                System.out.println("The jungle has gotten the better of you");
+                break;
+            }
+            System.out.println("----------------------------------------");
+            System.out.println("The " + enemy + " was defeated");
+            System.out.println("You have " + health + " health remaining");
+            if(rand.nextInt(100) < shieldChance){
+                numShield++;
+                System.out.println("Lucky you! The enemy has dropped a shield potion");
+                System.out.println("You have " + numShield + " shield potions");
+            }
+            if(rand.nextInt(100) < powerUpChance){
+                numPowerUps++;
+                System.out.println("Lucky you! The enemy has dropped a power up");
+                System.out.println("You have " + numPowerUps + " power ups");
+            }
+            System.out.println("----------------------------------------");
+            System.out.println("What would you like to do?");
+            System.out.println("Enter 1 to keep fighting");
+            System.out.println("Enter 2 to leave the jungle");
+            int input = scnr.nextInt();
+            while(input != 1 && input !=2 ){
+                System.out.println("Invalid Command");
+                input = scnr.nextInt();
+            }
+            if (input == 1){
+                System.out.println("You continue the journey to the treasure");
+            }
+
+
+
 
             
 
