@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 /** This class implements a text-based adventure game with inspiration from the
  online tutorial
- @author Gardner Temkin
+ @author Gardner Temkin, Jack Bradley, Isa Granizo
 
  */
 public class Main {
@@ -37,13 +37,14 @@ public class Main {
                 " fight your way to the hidden treasure?");
         System.out.println("Let the games begin!");
         boolean running = true;
+        // Initiate game sequence
         GAME:
         while (running){
 
             int enemyHealth = rand.nextInt(35) + 65;
             Enemy enemy = enemies[rand.nextInt(3)];
             System.out.println("The " + enemy + " has appeared!\n");
-
+            // loop for while enemy is alive, presenting choice to user
             while(enemyHealth > 0) {
                 System.out.println("Your Health: " + health);
                 System.out.println("Enemy Health: " + enemyHealth);
@@ -54,6 +55,7 @@ public class Main {
                 System.out.println("4 to Run, and have enemy respawn with new health");
 
                 int input = scnr.nextInt();
+                // user attacks
                 if (input == 1){
                 int damageDealt = rand.nextInt(attackDamage);
                 int damageTaken= rand.nextInt(enemyHitDamage);
@@ -66,6 +68,7 @@ public class Main {
                         break;
                     }
                 }
+                // user drinks shield
                 else if (input == 2){
                 if (numShield > 0){
                     health+= shieldValue;
@@ -73,11 +76,13 @@ public class Main {
                     System.out.println("You drank shield potion, you now have " + health + " health" +
                             "\nYou now have " + numShield + " shield potion left");
                 }
+                // user tries to use shield but is out
                 else {
                     System.out.println("You have no shield potion left! Defeat the enemy for a chance at " +
                             "a power up or shield potion!");
                 }
                 }
+                // user uses power up
                 else if (input == 3){
                     if(numPowerUps >= 1){
                         System.out.println("You have frozen the "+ enemy);
@@ -86,15 +91,18 @@ public class Main {
                         enemyHealth-= damageDealt;
                         numPowerUps--;
                     }
+                    // user tries to use power up but is out
                     else {
                         System.out.println("You have no power ups left! Defeat the enemy for a chance at " +
                                 "a power up or shield potion!");
                     }
                 }
+                // user runs away
                 else if (input == 4){
                     System.out.println("You run away from the " + enemy);
                     continue GAME;
                 }
+                // user inputs something other than 1-4
                 else {
                     System.out.println("Invalid Command");
                 }
@@ -102,7 +110,7 @@ public class Main {
 
             }
 
-
+            // user runs out of health
             if(health < 1){
                 System.out.println("The jungle has gotten the better of you");
                 break;
@@ -110,11 +118,13 @@ public class Main {
             System.out.println("----------------------------------------");
             System.out.println("The " + enemy + " was defeated");
             System.out.println("You have " + health + " health remaining");
+            // random chance of shield dropping
             if(rand.nextInt(100) < shieldChance){
                 numShield++;
                 System.out.println("Lucky you! The enemy has dropped a shield potion");
                 System.out.println("You have " + numShield + " shield potions");
             }
+            // random chance of power up dropping
             if(rand.nextInt(100) < powerUpChance){
                 numPowerUps++;
                 System.out.println("Lucky you! The enemy has dropped a power up");
@@ -125,13 +135,16 @@ public class Main {
             System.out.println("Enter 1 to keep fighting");
             System.out.println("Enter 2 to leave the jungle");
             int input = scnr.nextInt();
+            // user inputs something other than 1-2
             while(input != 1 && input !=2 ){
                 System.out.println("Invalid Command");
                 input = scnr.nextInt();
             }
+            // user continues game
             if (input == 1){
                 System.out.println("You continue your journey...");
             }
+            // user ends game
             else if (input ==2){
                 System.out.println("You exit the jungle wit your life, but no treasure.");
                 break;
