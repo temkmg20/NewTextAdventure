@@ -1,5 +1,8 @@
 public class Warrior extends Enemy{
 
+    public String toString() {
+        return "Warrior";
+    }
 
     public Warrior (String name){
         this.name=name;
@@ -7,3 +10,7 @@ public class Warrior extends Enemy{
     }
 
 }
+
+
+
+

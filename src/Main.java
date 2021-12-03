@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 /** This class implements a text-based adventure game with inspiration from the
  online tutorial
- @author Gardner Temkin
+ @author Gardner Temkin, Jack Bradley, Isa Granizo
 
  */
 public class Main {
@@ -12,7 +12,6 @@ public class Main {
         Random rand = new Random();
 
         // Game variables
-        //String [] enemies = {"Ninja", "Warrior", "Guard", "Assassin"};
         int maxEnemyHealth= 100;
         int minEnemyHealth= 65;
         int enemyHitDamage= 25;
@@ -30,12 +29,12 @@ public class Main {
         int attackDamage = 45;
         int powerUpChance= 22; // percentage
         int shieldChance= 30;
-        String powerUp = "Freeze"; // Allows player to deal damage without
-                                   // without taking any in return
+        String powerUp = "Extra Damage"; // Allows player to deal damage with none in return
 
         System.out.println("Welcome to Jungle Survivor\nDo you have what it takes to" +
                 " fight your way to the hidden treasure?");
-        System.out.println("Let the games begin!");
+        System.out.println("Defeat three enemies to grab the treasure!");
+        System.out.println("Begin!");
         boolean running = true;
         GAME:
         while (running){
@@ -62,6 +61,7 @@ public class Main {
                     System.out.println("You hit the " + enemy + " for " + damageDealt + " damage");
                     System.out.println("You received " + damageTaken + " in return");
                     if(health < 1 ){
+                        System.out.println("---------------------------------------");
                         System.out.println("You have taken to much damage to go on!");
                         break;
                     }
@@ -69,6 +69,7 @@ public class Main {
                 else if (input == 2){
                 if (numShield > 0){
                     health+= shieldValue;
+
                     numShield--;
                     System.out.println("You drank shield potion, you now have " + health + " health" +
                             "\nYou now have " + numShield + " shield potion left");
@@ -80,9 +81,8 @@ public class Main {
                 }
                 else if (input == 3){
                     if(numPowerUps >= 1){
-                        System.out.println("You have frozen the "+ enemy);
-                        System.out.println("You can now attack without receiving damage");
-                        int damageDealt = rand.nextInt(attackDamage);
+                        System.out.println("POWER UP! Enemy will lose health without dealing any return damage");
+                        int damageDealt = (int) (rand.nextInt(attackDamage) * 2);
                         enemyHealth-= damageDealt;
                         numPowerUps--;
                     }
@@ -104,11 +104,12 @@ public class Main {
 
 
             if(health < 1){
-                System.out.println("The jungle has gotten the better of you");
+                System.out.println("The jungle has gotten the better of you!");
                 break;
             }
             System.out.println("----------------------------------------");
             System.out.println("The " + enemy + " was defeated");
+            int counter =0;
             System.out.println("You have " + health + " health remaining");
             if(rand.nextInt(100) < shieldChance){
                 numShield++;
@@ -124,29 +125,28 @@ public class Main {
             System.out.println("What would you like to do?");
             System.out.println("Enter 1 to keep fighting");
             System.out.println("Enter 2 to leave the jungle");
+
             int input = scnr.nextInt();
             while(input != 1 && input !=2 ){
                 System.out.println("Invalid Command");
                 input = scnr.nextInt();
             }
             if (input == 1){
+                counter++;
                 System.out.println("You continue your journey...");
+                if(counter == 3){
+                    System.out.println("Well done! You navigated your way to the hidden treasure!");
+                }
             }
             else if (input ==2){
-                System.out.println("You exit the jungle wit your life, but no treasure.");
+                System.out.println("You exit the jungle with your life, but no treasure.");
                 break;
             }
-
-
-            // Fix the Guard issue
-            // Fix the "run option"
-
-
-            
 
         }
         System.out.println("#####################");
         System.out.println("Thanks for playing!");
         System.out.println("#####################");
+
     }
 }
